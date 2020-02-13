@@ -16,6 +16,7 @@ public class Inventory {
         fridgeItems = new ArrayList<>();
         toCookItems = new ArrayList<>();
     }
+
     // REQUIRES: a valid grocery item to be inputted
     // MODIFIES: this
     // EFFECTS: adds recipe ingredient list, creates a new inventory item and then adds it to the fridgeItem list
@@ -27,6 +28,7 @@ public class Inventory {
 
 
     }
+
     // REQUIRES: frigeItems to not be an empty list
     // MODIFIES: this
     // EFFECTS: returns the total amount of money spent on grocery items
