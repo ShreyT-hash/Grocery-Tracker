@@ -17,11 +17,13 @@ and **parents**.
 
 As a university student myself, a lot of times its hard to keep track of
 what is in my fridge and what to cook every day. A lot of times I end up
-not having the right ingredients or end up throwing stuff out. My creating
+not having the right ingredients or end up throwing stuff out. By creating
 a tracker, hopefully I can prevent this from happening.
 
 ##User Stories
-- As a user, I want to be able to add my groceries to a collection
-- As a user, I want to be able to view the total amount of money I spent after every grocery run
-- As a user, I want to be able to view what items I currently have in my fridge/ inventory at home.
-- As a user, I want to be able to see if any recipes can be created from the ingredients that I purchased
+- As a user, I want to be able to add my groceries to a collection.
+- As a user, I want to be able to view the total amount of money I spent after every grocery run.
+- As a user, I want to be able to view what items I currently have in my fridge/ inventory at home and whether or not 
+they are perishable.
+- As a user, I want to be able to see how many perishable items I have in my fridge after inputting all the groceries 
+that I bought.

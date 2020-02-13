@@ -6,6 +6,9 @@ public class InventoryItem {
     private int quantity;
     boolean perishable;
 
+
+    // EFFECTS: constructs an inventory item which is consists of a grocery item, its quantity and whether it is
+    // perishable or not
     public InventoryItem(GroceryItem item, int quantity, boolean perishable) {
         this.groceryItem = item;
         this.quantity = quantity;
@@ -23,4 +26,6 @@ public class InventoryItem {
     public boolean isPerishable() {
         return perishable;
     }
+
+
 }

@@ -8,7 +8,7 @@ public class GroceryItem {
     private int quantity;
 
 
-    // EFFECTS: constructs a grocery item with name and price (in cents) and the quantity purchased
+    // EFFECTS: constructs a grocery item with name and price
     public GroceryItem(String name, double price) {
         this.name = name;
         this.price = price;
@@ -27,7 +27,4 @@ public class GroceryItem {
         return quantity;
     }
 
-//    public void addQuantity(int quant) {
-//        this.quantity += quant;
-//    }
 }

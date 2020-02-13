@@ -33,13 +33,14 @@ public class RecipeTest {
     }
 
     @Test
-    void testCheckRecipe(){
+    void testCheckRecipe() {
         inventory.addItemToInventory(milk, 1, true);
         inventory.addItemToInventory(cheerioes, 1, true);
         inventory.addItemToInventory(sugar, 2, false);
+        inventory.addItemToInventory(pasta, 2, false);
 
         assertFalse(recipes.containsRecipe(inventory.getToCookItems(), penneArabiatta));
         assertTrue(recipes.containsRecipe(inventory.getToCookItems(), cereal));
-    }
 
+    }
 }

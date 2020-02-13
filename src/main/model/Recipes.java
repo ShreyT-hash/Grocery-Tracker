@@ -3,27 +3,23 @@ package model;
 import java.util.ArrayList;
 
 public class Recipes {
-//    Inventory inventory;
-//    ArrayList<GroceryItem> cereal;
-//    ArrayList<GroceryItem> penneArabiatta;
-//    GroceryItem milk = new GroceryItem("milk", 2, 3);
-//    GroceryItem cheetoes = new GroceryItem("cheetoes", 1, 3);
-//    GroceryItem sugar = new GroceryItem("sugar", 1.4, 3);
-//    GroceryItem cheeroes = new GroceryItem("cheeroes", 1.8, 1);
-//    GroceryItem tomatoSauce = new GroceryItem("tomato sauce", 3.2, 1);
-//    GroceryItem pasta = new GroceryItem("pasta", 1.4, 2);
+    ArrayList<GroceryItem> cereal;
+    GroceryItem milk = new GroceryItem("milk", 2);
+    GroceryItem cheetoes = new GroceryItem("cheetoes", 1);
+    GroceryItem sugar = new GroceryItem("sugar", 1.4);
+    GroceryItem cheerioes = new GroceryItem("cheerioes", 1.8);
 
-    Recipes() {
 
-//        cereal.add(milk);
-//        cereal.add(sugar);
-//        cereal.add(cheeroes);
-//        penneArabiatta.add(tomatoSauce);
-//        penneArabiatta.add(pasta);
-
+    // EFFECTS: constructs a recipe which currently has a collection of grocery items
+    public Recipes() {
+        cereal = new ArrayList<>();
+        cereal.add(sugar);
 
     }
 
+    //REQUIRES: two valid collections of groceryItem to be passed as parameters so they can be compared
+    //MODIFIES: this
+    // EFFECTS: takes two groceryItem collections, if b contains everything in a, then returns true, else returns false
     public boolean containsRecipe(ArrayList<GroceryItem> a, ArrayList<GroceryItem> b) {
         if (a.containsAll(b)) {
             return true;
@@ -33,5 +29,7 @@ public class Recipes {
     }
 
 
-
+    public ArrayList<GroceryItem> getCereal() {
+        return cereal;
+    }
 }
