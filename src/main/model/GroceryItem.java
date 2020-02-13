@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class GroceryItem {
     private String name;
     private double price;
-    private int quantity;
+
 
 
     // EFFECTS: constructs a grocery item with name and price
@@ -23,8 +23,8 @@ public class GroceryItem {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+
+
+    // Got the idea to create a groceryItem class like this one based on Assignment 2 which was done earlier this term
 
 }

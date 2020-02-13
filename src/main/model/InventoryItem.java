@@ -26,6 +26,7 @@ public class InventoryItem {
     public boolean isPerishable() {
         return perishable;
     }
-
+// Got the idea  to create an InventoryItem class like this one from Assignment 2 which was done earlier this term
+    // and this class is based on the Line Item class.
 
 }
