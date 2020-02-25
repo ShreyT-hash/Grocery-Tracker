@@ -1,10 +1,13 @@
 package model;
 
+import persistence.Saveable;
+
 import java.awt.*;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-public class Inventory {
+public class Inventory  {
     ArrayList<InventoryItem> fridgeItems;
     ArrayList<GroceryItem> toCookItems;
     StringBuilder sb = new StringBuilder();
@@ -66,7 +69,7 @@ public class Inventory {
 
             inventoryDisplay = "Item: " + groceryItemName + "/ Quantity: " + groceryItemQuantity + "/ Perishable: "
                     + expYn + "\n";
-            inventoryDisplay = sb.append(inventoryDisplay).toString();
+           inventoryDisplay = sb.append(inventoryDisplay).toString();
         }
         return inventoryDisplay;
     }
@@ -94,6 +97,7 @@ public class Inventory {
     public ArrayList getToCookItems() {
         return toCookItems;
     }
+
 
 
 }
