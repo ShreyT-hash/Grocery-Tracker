@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-public class Inventory  {
+public class Inventory {
     ArrayList<InventoryItem> fridgeItems;
     ArrayList<GroceryItem> toCookItems;
     StringBuilder sb = new StringBuilder();
@@ -69,7 +69,7 @@ public class Inventory  {
 
             inventoryDisplay = "Item: " + groceryItemName + "/ Quantity: " + groceryItemQuantity + "/ Perishable: "
                     + expYn + "\n";
-           inventoryDisplay = sb.append(inventoryDisplay).toString();
+            inventoryDisplay = sb.append(inventoryDisplay).toString();
         }
         return inventoryDisplay;
     }
@@ -98,6 +98,23 @@ public class Inventory  {
         return toCookItems;
     }
 
+
+    public String viewInventoryWrite() {
+        String inventoryDisplay = "";
+
+        for (InventoryItem ii : fridgeItems) {
+
+            String groceryItemName = ii.getGroceryItem().getName();
+            int groceryItemQuantity = ii.getQuantity();
+            boolean exp = ii.isPerishable();
+            String expYn = Boolean.toString(exp);
+
+            inventoryDisplay = groceryItemName + "/" + groceryItemQuantity + "/"
+                    + expYn + "/\n";
+            inventoryDisplay = sb.append(inventoryDisplay).toString();
+        }
+        return inventoryDisplay;
+    }
 
 
 }

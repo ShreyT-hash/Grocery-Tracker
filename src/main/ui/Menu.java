@@ -9,10 +9,12 @@ import persistence.ToWrite;
 import javax.sound.midi.Soundbank;
 import java.io.*;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
-    ToWrite toWrite;
+    String xd;
+    GroceryItem groceryItem;
     private static final String ACCOUNTS_FILE = "./data/Pantry_Items.txt";
     private Scanner input;
     Inventory inventory = new Inventory();
@@ -93,12 +95,11 @@ public class Menu {
         System.out.println(inventory.sumToString());
     }
 
-    private void viewPantryUI() {
+    private void viewPantryUI() throws IOException {
         String y = inventory.viewInventory();
         System.out.println(y);
         System.out.println(inventory.getFridgeItems().size());
         System.out.println("Total amount of perishable items are: " + inventory.perishableCount());
-
 
 
     }
@@ -148,7 +149,7 @@ public class Menu {
 
         ToWrite write = new ToWrite();
 
-        write.writing(inventory.viewInventory());
+        write.writing(inventory.viewInventoryWrite());
 
 //            ToWrite writer = new ToWrite(new File(ACCOUNTS_FILE));
 //            writer.write(inventory);

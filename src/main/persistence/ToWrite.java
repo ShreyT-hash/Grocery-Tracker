@@ -5,7 +5,6 @@ import model.Inventory;
 import java.io.*;
 
 public class ToWrite {
-    Inventory inventory = new Inventory();
 
 //    private PrintWriter printWriter;
 //

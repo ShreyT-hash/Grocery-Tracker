@@ -27,3 +27,7 @@ a tracker, hopefully I can prevent this from happening.
 they are perishable.
 - As a user, I want to be able to see how many perishable items I have in my fridge after inputting all the groceries 
 that I bought.
+- As a user, I want to be able to save the grocery items that I have 
+purchased and their attributes to a text file.
+- As a user, I want to be able to load the grocery items that I previously
+saved into my current pantry upon starting the program. 
