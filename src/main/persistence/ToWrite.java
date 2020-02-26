@@ -25,9 +25,9 @@ public class ToWrite {
 //        printWriter.close();
 //    }
 
-    public void writing(String toPut) {
+    public void writing(String toPutin) {
         try {
-            String toInputItems = toPut;
+            String toInputItems = toPutin;
 
 
             BufferedWriter writer = new BufferedWriter(
