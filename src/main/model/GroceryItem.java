@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 
 public class GroceryItem {
     private String name;

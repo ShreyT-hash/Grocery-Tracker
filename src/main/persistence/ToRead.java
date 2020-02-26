@@ -1,8 +1,5 @@
 package persistence;
 
-import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
-import model.GroceryItem;
-import model.Inventory;
 
 import java.io.BufferedReader;
 import java.io.File;

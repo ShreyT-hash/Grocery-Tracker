@@ -1,6 +1,5 @@
 package persistence;
 
-import model.Inventory;
 
 import java.io.*;
 

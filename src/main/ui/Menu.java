@@ -6,16 +6,10 @@ import model.Recipes;
 import persistence.ToRead;
 import persistence.ToWrite;
 
-import javax.sound.midi.Soundbank;
 import java.io.*;
-import java.net.URI;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
-    String xd;
-    GroceryItem groceryItem;
-    private static final String ACCOUNTS_FILE = "./data/Pantry_Items.txt";
     private Scanner input;
     Inventory inventory = new Inventory();
 
