@@ -24,13 +24,13 @@ public class ToWrite {
 //        printWriter.close();
 //    }
 
-    public void writing(String toPutin) {
+    public void writing(String toPutin, String fileName) {
         try {
             String toInputItems = toPutin;
 
 
             BufferedWriter writer = new BufferedWriter(
-                    new FileWriter("./data/Pantry_Items.txt")  //Set true for append mode
+                    new FileWriter(fileName)  //Set true for append mode
             );
             writer.newLine();
             writer.write(toInputItems);

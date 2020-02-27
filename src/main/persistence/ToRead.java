@@ -1,6 +1,9 @@
 package persistence;
 
 
+import model.GroceryItem;
+import model.Inventory;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.*;
@@ -10,19 +13,17 @@ import java.util.Arrays;
 public class ToRead {
     public static final String DELIMITER = "/";
     String st;
+    Inventory inventory = new Inventory();
 
     ArrayList<String> nameTing = new ArrayList<>();
     ArrayList<Integer> quantityTing = new ArrayList<Integer>();
     ArrayList<String> perishableTing = new ArrayList<>();
 
+    GroceryItem groceryItem;
 
     public ToRead() throws FileNotFoundException {
     }
 
-    public ArrayList<String> splitString(String line) {
-        String[] splits = line.split(DELIMITER);
-        return new ArrayList<>(Arrays.asList(splits));
-    }
 
     public void setBr() throws IOException {
 
@@ -35,15 +36,14 @@ public class ToRead {
 
             System.out.println(st);
         }
+
+
     }
     //return splitString(st);
 
-    public String getSt() {
-        return st;
-    }
 
-    public String readAllLines() throws IOException {
-        File file = new File("./data/Pantry_Items.txt");
+    public String readAllLines(File file) throws IOException {
+        //  File file = new File("./data/Pantry_Items.txt");
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -58,8 +58,9 @@ public class ToRead {
         return content.toString();
     }
 
-    public void parseFile() throws IOException {
-        String[] listTing = readAllLines().split("/");
+
+    public void parseFile(String str) throws IOException {
+        String[] listTing = str.split("/");
 
 
         for (int j = 0; j < listTing.length; j = j + 3) {

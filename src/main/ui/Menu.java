@@ -10,6 +10,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Menu {
+    GroceryItem groceryItem;
+    double tempGICost;
     private Scanner input;
     Inventory inventory = new Inventory();
 
@@ -48,6 +50,8 @@ public class Menu {
         System.out.println("\t3 -> VIEW TOTAL MONEY SPENT");
         System.out.println("\t4 -> VIEW POSSIBLE RECIPES");
         System.out.println("\t5 -> quit");
+        System.out.println("\t6 -> load pantry items from previous run");
+        System.out.println("\t7 -> save current grocery run items to file");
     }
 
     private void processCommand(String command) throws IOException {
@@ -55,6 +59,7 @@ public class Menu {
             addGroceryUI();
         } else if (command.equals("2")) {
             viewPantryUI();
+
         } else if (command.equals("3")) {
             viewMoneySpentUI();
         } else if (command.equals("4")) {
@@ -73,6 +78,22 @@ public class Menu {
     private void loadPreviousEntryItems() throws IOException {
         ToRead toRead = new ToRead();
         toRead.setBr();
+        toRead.parseFile(toRead.readAllLines(new File("./data/Pantry_Items.txt")));
+        for (int i = 0; i < toRead.getPerishableTing().size(); i++) {
+            inventory.addItemToInventory(new GroceryItem(toRead.getNameTing().get(i), 2),
+                    toRead.getQuantityTing().get(1), Boolean.getBoolean(toRead.getPerishableTing().get(i)));
+        }
+
+        //  toRead.parseFile();
+        // toRead.splitString(inventory.viewInventoryWrite());
+
+//        for (int i = 0; i < toRead.getNameTing().size(); i++) {
+//            groceryItem = new GroceryItem(toRead.getNameTing().get(i), tempGICost);
+//            inventory.addItemToInventory(groceryItem, toRead.getQuantityTing().get(i),
+//                    Boolean.getBoolean(toRead.getPerishableTing().get(i)));
+//
+//        }
+
     }
 
 
@@ -117,7 +138,7 @@ public class Menu {
 
     private void groceryAddInput() {
         String tempGI;
-        double tempGICost;
+
         int tempGIQuant;
         boolean tempGIExp;
         System.out.println("Please enter the grocery that you purchased");
@@ -143,7 +164,7 @@ public class Menu {
 
         ToWrite write = new ToWrite();
 
-        write.writing(inventory.viewInventoryWrite());
+        write.writing(inventory.viewInventoryWrite(),"./data/Pantry_Items.txt");
 
 //            ToWrite writer = new ToWrite(new File(ACCOUNTS_FILE));
 //            writer.write(inventory);

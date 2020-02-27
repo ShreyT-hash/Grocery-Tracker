@@ -4,6 +4,7 @@ import model.GroceryItem;
 import model.Inventory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ui.Menu;
 
 import java.io.*;
 
@@ -17,7 +18,6 @@ public class ToWriteTest {
     ToWrite write = new ToWrite();
 
     GroceryItem milk = new GroceryItem("milk", 2);
-    GroceryItem cheetoes = new GroceryItem("cheetoes", 1);
     GroceryItem sugar = new GroceryItem("sugar", 1.4);
     GroceryItem cheerioes = new GroceryItem("cheerioes", 1.8);
 
@@ -34,11 +34,12 @@ public class ToWriteTest {
 
     @Test
             void testToWrite() throws FileNotFoundException {
-        write.writing(inventory.viewInventoryWrite());
+        write.writing(inventory.viewInventoryWrite(), "./data/Pantry_Items2.txt");
 
         try {
+
            //toRead.readAllLines();
-            toRead.parseFile();
+            toRead.parseFile(toRead.readAllLines(new File("./data/Pantry_Items2.txt")));
 
             assertEquals(toRead.getNameTing().get(0), "\r\nmilk");
 
@@ -52,6 +53,7 @@ public class ToWriteTest {
             assertEquals(toRead.getPerishableTing().get(0), "true");
             assertEquals(toRead.getPerishableTing().get(1), "true");
             assertEquals(toRead.getPerishableTing().get(2), "false");
+            assertEquals(inventory.getFridgeItems().size(), 3);
 
         } catch (IOException e) {
             fail("IOException should not have been thrown");
