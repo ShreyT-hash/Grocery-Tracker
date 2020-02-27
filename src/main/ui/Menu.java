@@ -10,7 +10,6 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Menu {
-    GroceryItem groceryItem;
     double tempGICost;
     private Scanner input;
     Inventory inventory = new Inventory();
@@ -43,6 +42,8 @@ public class Menu {
         System.out.println("\nGoodbye!");
     }
 
+
+    // EFFECTS: displays a menu containing different options to user
     private void displayMenu() {
         System.out.println("\nWelcome To Your Very Own Grocery Manager:");
         System.out.println("\t1 -> ADD GROCERIES");
@@ -54,6 +55,8 @@ public class Menu {
         System.out.println("\t7 -> save current grocery run items to file");
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user command
     private void processCommand(String command) throws IOException {
         if (command.equals("1")) {
             addGroceryUI();
@@ -75,28 +78,24 @@ public class Menu {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: loads a list of items from the Pantry_Items.txt file and adds
+    // them to the current pantry
     private void loadPreviousEntryItems() throws IOException {
         ToRead toRead = new ToRead();
         toRead.setBr();
         toRead.parseFile(toRead.readAllLines(new File("./data/Pantry_Items.txt")));
         for (int i = 0; i < toRead.getPerishableTing().size(); i++) {
             inventory.addItemToInventory(new GroceryItem(toRead.getNameTing().get(i), 2),
-                    toRead.getQuantityTing().get(1), Boolean.getBoolean(toRead.getPerishableTing().get(i)));
+                    toRead.getQuantityTing().get(i), Boolean.getBoolean(toRead.getPerishableTing().get(i)));
         }
 
-        //  toRead.parseFile();
-        // toRead.splitString(inventory.viewInventoryWrite());
-
-//        for (int i = 0; i < toRead.getNameTing().size(); i++) {
-//            groceryItem = new GroceryItem(toRead.getNameTing().get(i), tempGICost);
-//            inventory.addItemToInventory(groceryItem, toRead.getQuantityTing().get(i),
-//                    Boolean.getBoolean(toRead.getPerishableTing().get(i)));
-//
-//        }
 
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: if can make cereal based on ingredients, prints accordingly, else
+    // says that recipes cannot be made yet
     private void viewRecipesUI() {
         Recipes recipes = new Recipes();
         if (recipes.containsRecipe(recipes.getCereal(), inventory.getFridgeItems())) {
@@ -106,10 +105,14 @@ public class Menu {
         }
     }
 
+
+    //EFFECTS: prints total money spent on groceries
     private void viewMoneySpentUI() {
         System.out.println(inventory.sumToString());
     }
 
+    //MODIFIES: this
+    //EFFECTS: prints everything in the pantry
     private void viewPantryUI() throws IOException {
         String y = inventory.viewInventory();
         System.out.println(y);
@@ -120,6 +123,9 @@ public class Menu {
     }
 
 
+
+    //EFFECTS: condition to add more groceries, if N is clicked goes back to menu, else
+    // prompts user to add another grocery
     private void addGroceryUI() {
         boolean keepGoingAG = true;
 
@@ -136,6 +142,10 @@ public class Menu {
         }
     }
 
+
+    //MODIFIES: this
+    //EFFECTS: prompts users to enter their purchases, creates a GroceryItem + InventoryItem
+    // and stores info into the pantry
     private void groceryAddInput() {
         String tempGI;
 
@@ -160,22 +170,15 @@ public class Menu {
         inventory.addItemToInventory(groceryItem, tempGIQuant, tempGIExp);
     }
 
+
+    //MODIFIES: this
+    //EFFECTS: writes current grocery run items to a file called Pantry_Items.txt
     private void saveFileUI() {
 
         ToWrite write = new ToWrite();
 
-        write.writing(inventory.viewInventoryWrite(),"./data/Pantry_Items.txt");
+        write.writing(inventory.viewInventoryWrite(), "./data/Pantry_Items.txt");
 
-//            ToWrite writer = new ToWrite(new File(ACCOUNTS_FILE));
-//            writer.write(inventory);
-//          //  writer.write();
-//            writer.close();
-//            System.out.println("Accounts saved to file " + ACCOUNTS_FILE);
-//        } catch (FileNotFoundException e) {
-//            System.out.println("Unable to save accounts to " + ACCOUNTS_FILE);
-//        } catch (UnsupportedEncodingException e) {
-//            e.printStackTrace();
-//            // this is due to a programming error
     }
 }
 

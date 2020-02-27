@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ToRead {
     public static final String DELIMITER = "/";
@@ -19,12 +18,13 @@ public class ToRead {
     ArrayList<Integer> quantityTing = new ArrayList<Integer>();
     ArrayList<String> perishableTing = new ArrayList<>();
 
-    GroceryItem groceryItem;
 
+    //EFFECTS: constructs a reader that will read data from a file and throw an exception if file does not exist
     public ToRead() throws FileNotFoundException {
     }
 
-
+    // MODIFIES: this
+    //EFFECTS: while there are lines with data on them, reads all the lines in the newly created Pantry_Items text file
     public void setBr() throws IOException {
 
         File file = new File("./data/Pantry_Items.txt");
@@ -39,11 +39,15 @@ public class ToRead {
 
 
     }
-    //return splitString(st);
 
 
+    // MODIFIES: this
+    //EFFECTS: reads all the lines which have data on them
+    // using a buffered reader in a given file and appends and returns it to a string
+    // Used code to change fileData into a string using a buffered reader
+    // from this website: https://www.baeldung.com/reading-file-in-java
     public String readAllLines(File file) throws IOException {
-        //  File file = new File("./data/Pantry_Items.txt");
+
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 
@@ -58,7 +62,9 @@ public class ToRead {
         return content.toString();
     }
 
-
+    // MODIFIES: this
+    //EFFECTS: parses string by taking a string, splitting it at every "/" and storing it in an Array called listTing
+   // 3 for loops are then used used to store listTing arrayValues into their respective arraylists
     public void parseFile(String str) throws IOException {
         String[] listTing = str.split("/");
 
@@ -78,16 +84,6 @@ public class ToRead {
             perishableTing.add(listTing[l]);
 
         }
-//        System.out.println(perishableTing.get(0));
-//        System.out.println(quantityTing.get(0));
-//        System.out.println(nameTing.get(0));
-
-
-        //    groceryItem = new GroceryItem(nameTing.get(i), 3);
-        //  inventory.addItemToInventory(groceryItem, quantityTing.get(i), Boolean.getBoolean(perishableTing.get(i)));
-        //   inventory.addItemToInventory(groceryItem, quantityTing.get(i), false);
-        //   inventory.addItemToInventory(groceryItem, quantityTing.get(i), Boolean.getBoolean(perishableTing.get(i)));
-
     }
 
     public ArrayList<Integer> getQuantityTing() {

@@ -5,25 +5,10 @@ import java.io.*;
 
 public class ToWrite {
 
-//    private PrintWriter printWriter;
-//
-//    public ToWrite(File file) throws FileNotFoundException, UnsupportedEncodingException {
-//        printWriter = new PrintWriter(file, "UTF-8");
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: writes saveable to file
-//    public void write(Saveable saveable) {
-//        saveable.save(printWriter);
-//    }
-//
-//    // MODIFIES: this
-//    // EFFECTS: close print writer
-//    // NOTE: you MUST call this method when you are done writing data!
-//    public void close() {
-//        printWriter.close();
-//    }
-
+    //REQUIRES: grocery items to have been added to the inventory
+    //MODIFIES: this
+    //EFFECTS: takes 2 strings, the user input and text file path and writes the user input to that text file
+    // using a buffered writer, closes file, prints success, else throws an IOException
     public void writing(String toPutin, String fileName) {
         try {
             String toInputItems = toPutin;
