@@ -32,7 +32,7 @@ public class Menu {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("5")) {
+            if (command.equals("7")) {
                 keepGoing = false;
             } else {
                 processCommand(command);
@@ -50,9 +50,9 @@ public class Menu {
         System.out.println("\t2 -> VIEW PANTRY");
         System.out.println("\t3 -> VIEW TOTAL MONEY SPENT");
         System.out.println("\t4 -> VIEW POSSIBLE RECIPES");
-        System.out.println("\t5 -> quit");
-        System.out.println("\t6 -> load pantry items from previous run");
-        System.out.println("\t7 -> save current grocery run items to file");
+        System.out.println("\t5 -> load pantry items from previous run");
+        System.out.println("\t6 -> save current grocery run items to file");
+        System.out.println("\t7 -> quit");
     }
 
     // MODIFIES: this
@@ -69,10 +69,11 @@ public class Menu {
             viewRecipesUI();
             //   System.out.println("This feature has not been implemented yet");
 
-        } else if (command.equals("7")) {
-            saveFileUI();
-        } else if (command.equals("6")) {
+        } else if (command.equals("5")) {
             loadPreviousEntryItems();
+
+        } else if (command.equals("6")) {
+            saveFileUI();
         } else {
             System.out.println("Selection not valid...");
         }
@@ -129,7 +130,6 @@ public class Menu {
     private void addGroceryUI() {
         boolean keepGoingAG = true;
 
-        Inventory inventory = new Inventory();
         while (keepGoingAG == true) {
             groceryAddInput();
 
