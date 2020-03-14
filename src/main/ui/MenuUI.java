@@ -23,6 +23,8 @@ public class MenuUI implements ActionListener {
     ArrayList<JButton> menuButtons = new ArrayList<>();
     AddGroceryScene ags = new AddGroceryScene();
 
+    public MenuUI() throws IOException {
+    }
 
 
     public void addButtonsToFrame() {
@@ -51,14 +53,7 @@ public class MenuUI implements ActionListener {
         addButtonsToFrame();
         addToInitialScene();
 
-//        frameScene.add(addGroceries);
-//        frameScene.add(viewPantry);
-//        frameScene.add(viewMoney);
-//        frameScene.add(viewRecipes);
-//        frameScene.add(loadItems);
-//        frameScene.add(saveItems);
-//        frameScene.add(quitB);
-//
+
         frameScene.add(welcomeLabel);
     }
 

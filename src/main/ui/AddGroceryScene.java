@@ -4,55 +4,57 @@ import model.GroceryItem;
 import model.Inventory;
 import persistence.ToRead;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class AddGroceryScene implements ActionListener {
+public class AddGroceryScene extends Canvas implements ActionListener {
+    ToRead toRead = new ToRead();
+    ArrayList<JButton> grocerySButtons = new ArrayList<>();
+
+    ArrayList<JLabel> itemsList = new ArrayList<>();
+    JPanel fridge = new JPanel();
+    String imagePath = "C:\\Users\\shrey\\Desktop\\fridge.png";
+    BufferedImage myPicture = ImageIO.read(new File(imagePath));
+    JLabel picLabel = new JLabel(new ImageIcon(myPicture));
     Inventory inventory = new Inventory();
     java.awt.Font defaultFont = new java.awt.Font("Segoe UI Light", Font.PLAIN, 30);
+    java.awt.Font textFont = new java.awt.Font("Segoe UI Light", Font.PLAIN, 25);
+
 
     UserInterface ui = new UserInterface();
     JFrame addGroceryScene = new JFrame();
-    JButton addGrocery = new JButton();
-    JButton viewPantry = new JButton();
-    JButton viewMoney = new JButton();
-
+    JButton addGrocery = new JButton("Add Groceries");
+    JButton viewPantry = new JButton("View Pantry Items");
+    JButton viewMoney = new JButton("View Summary");
     String name;
     String quantity;
     String price;
     String perishable;
-    JTextField jft = new JTextField();
+    JLabel groceryDisplay;
+
+    public AddGroceryScene() throws IOException {
+    }
 
 
     public void createScene2() throws IOException {
         addGroceryScene.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
         addGroceryScene.setLayout(null);//using no layout managers
         addGroceryScene.setVisible(true);
+        fridge.add(picLabel);
+        fridge.setVisible(true);
 
+        addButtonsToFrame();
+        addtoGroceryScene();
 
-        ui.addButton(Color.pink, defaultFont, addGrocery, "Add Grocery Item", 100,
-                120, 300, 70);
-        ui.addButton(Color.pink, defaultFont, viewPantry, "View Pantry", 720, 120, 300,
-                70);
-        ui.addButton(Color.pink, defaultFont, viewMoney, "View Money Spent", 720, 120, 300,
-                70);
-
-
-
-
-
-        jft.setBounds(300, 400, 400, 300);
-        jft.setText(inventory.viewInventory());
-        jft.setVisible(false);
-        addGroceryScene.add(addGrocery);
-        addGroceryScene.add(viewPantry);
-        addGroceryScene.add(jft);
-        addGrocery.addActionListener(this);
-        viewPantry.addActionListener(this);
+        fridge.setSize(myPicture.getWidth(), myPicture.getHeight());
+        addGroceryScene.add(fridge);
 
 
     }
@@ -67,7 +69,39 @@ public class AddGroceryScene implements ActionListener {
                 "Enter true if perishable, false if not");
 
         GroceryItem groceryItem = new GroceryItem(name, Double.parseDouble(price));
-        inventory.addItemToInventory(groceryItem, Integer.parseInt(quantity), Boolean.getBoolean(perishable));
+        inventory.addItemToInventory(groceryItem, Integer.parseInt(quantity), Boolean.valueOf(perishable));
+        itemsList.add(new JLabel(name + " | " + quantity + " | " + perishable));
+
+
+    }
+
+    public void addButtonsToFrame() {
+
+        grocerySButtons.add(addGrocery);
+        grocerySButtons.add(viewPantry);
+        grocerySButtons.add(viewMoney);
+
+        for (JButton j : grocerySButtons) {
+            addGroceryScene.add(j);
+
+        }
+
+    }
+
+    public void addtoGroceryScene() {
+        int newYPOS = 180;
+        for (JButton j : grocerySButtons) {
+
+            ui.addButton(Color.pink, defaultFont, j, j.getText(), 60,
+                    newYPOS, 300, 70);
+            newYPOS = newYPOS + 80;
+
+        }
+        for (JButton j : grocerySButtons) {
+
+            j.addActionListener(this);
+
+        }
     }
 
     public String getName() {
@@ -87,27 +121,52 @@ public class AddGroceryScene implements ActionListener {
         return perishable;
     }
 
+
     public void pantryShow() {
+        if (fridge.isVisible() == false) {
+            fridge.setVisible(true);
+
+            int newYPOS = 300;
+            for (JLabel j : itemsList) {
+
+                j.setBounds(500, newYPOS, 220, 70);
+                j.setVisible(true);
+                j.setFont(textFont);
+
+                addGroceryScene.add(j);
+                newYPOS = newYPOS + 35;
 
 
+            }
 
+
+//            groceryDisplay.setText(inventory.viewInventory() + "\n");
+//            groceryDisplay.setBounds(500, 180, 700, 200);
+//            groceryDisplay.setVisible(true);
+//            addGroceryScene.add(groceryDisplay);
+
+        } else {
+            fridge.setVisible(false);
+
+
+        }
 
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Add Grocery Item")) {
+        if (e.getActionCommand().equals("Add Groceries")) {
 
 
             jpaneDo();
 
         }
-        if (e.getActionCommand().equals("View Pantry")) {
+        if (e.getActionCommand().equals("View Pantry Items")) {
             pantryShow();
-            jft.setVisible(true);
-            jft.setEditable(false);
-            jft.setText(inventory.viewInventory());
+
 
         }
     }
 }
+
