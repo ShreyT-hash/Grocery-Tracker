@@ -36,7 +36,7 @@ public class Inventory {
         double sum = 0;
         for (InventoryItem ii : fridgeItems) {
 
-            sum = sum + ii.getGroceryItem().getPrice();
+            sum = sum + ii.getGroceryItem().getPrice() * ii.getQuantity();
 
         }
         return sum;

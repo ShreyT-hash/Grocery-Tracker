@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-       MenuUI menuUI = new MenuUI();
+        MenuUI menuUI = new MenuUI();
         menuUI.popMenu();
         new Menu();
 

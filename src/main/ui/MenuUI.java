@@ -28,8 +28,6 @@ public class MenuUI implements ActionListener {
 
 
     public void addButtonsToFrame() {
-       // menuButtons.add(addGroceries);
-       // menuButtons.add(viewMoney);
         menuButtons.add(viewPantry);
         menuButtons.add(viewRecipes);
         menuButtons.add(loadItems);
@@ -39,7 +37,6 @@ public class MenuUI implements ActionListener {
             frameScene.add(j);
 
         }
-
     }
 
     public void popMenu() {
@@ -58,12 +55,12 @@ public class MenuUI implements ActionListener {
     }
 
     public void addToInitialScene() {
-        int newYPOS = 176;
+        int newYPosition = 176;
         for (JButton j : menuButtons) {
 
             ui.addButton(Color.green, defaultFont, j, j.getText(), 400,
-                    newYPOS, 300, 45);
-            newYPOS = newYPOS + 55;
+                    newYPosition, 300, 45);
+            newYPosition = newYPosition + 55;
 
         }
         for (JButton j : menuButtons) {
@@ -71,25 +68,6 @@ public class MenuUI implements ActionListener {
             j.addActionListener(this);
 
         }
-
-//        ui.addButton(Color.green, defaultFont, addGroceries, "Add Groceries", 400,
-//                200, 300, 45);
-//
-//        ui.addButton(Color.green, defaultFont, viewPantry, "View Pantry", 400,
-//                250, 300, 45);
-//        ui.addButton(Color.green, defaultFont, viewMoney, "View Money", 400,
-//                300, 300, 45);
-//
-//        ui.addButton(Color.green, defaultFont, viewRecipes, "View Recipes", 400,
-//                350, 300, 45);
-//        ui.addButton(Color.green, defaultFont, loadItems, "Load Items", 400,
-//                400, 300, 45);
-//
-//        ui.addButton(Color.green, defaultFont, saveItems, "Save Items", 400,
-//                450, 300, 45);
-//
-//        ui.addButton(Color.green, defaultFont, quitB, "Quit Application", 400,
-//                500, 300, 45);
 
     }
 
@@ -101,39 +79,17 @@ public class MenuUI implements ActionListener {
             System.exit(0);
         } else if (e.getActionCommand().equals("Go To My Pantry")) {
 
-            frameScene.setVisible(false);
+            // frameScene.setVisible(false);
 
             try {
                 ags.createScene2();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        } else {
-
         }
     }
 
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        if (e.getActionCommand().equals("Exit Application")) {
-//
-//            System.exit(0);
-//        } else if (e.getActionCommand().equals("View Pantry")) {
-//            frameScene.setVisible(false);
-//
-//        } else if (e.getActionCommand().equals("View Money")) {
-//            frameScene.setVisible(false);
-//
-//        } else if (e.getActionCommand().equals("View Recipes")) {
-//            frameScene.setVisible(false);
-//
-//        } else if (e.getActionCommand().equals("Load Items")) {
-//            frameScene.setVisible(false);
-//
-//        } else if (e.getActionCommand().equals("Save Items")) {
-//            frameScene.setVisible(false);
-//        }
-//    }
+
 }
 
 
