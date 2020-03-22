@@ -31,3 +31,18 @@ that I bought.
 purchased and their attributes to a text file.
 - As a user, I want to be able to load the grocery items that I previously
 saved into my current pantry upon starting the program. 
+
+# <h4> Instructions for grader</h4>	
+- You can generate the first user story by clicking
+'Go to My Pantry', then 'Add Grocery' and then
+entering what the dialog boxes ask you to enter.  
+
+- You can generate the second and fourth user stories by clicking the
+'View Summary' button. Click 'Back To Pantry' to generate the other events.
+
+- Once you have added a few groceries, you can trigger
+my visual component and generate the third user story
+by clicking on 'View Pantry Items' (*there is a chance groceries may not show up on the first click, 
+ensure 'View Pantry is clicked at least twice'*)
+
+- You can save the state of my application by clicking on 'Save Items'
