@@ -10,7 +10,7 @@ public class Main {
 
         MenuUI menuUI = new MenuUI();
         menuUI.popMenu();
-        new Menu();
+
 
     }
 }

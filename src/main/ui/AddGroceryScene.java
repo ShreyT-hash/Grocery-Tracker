@@ -2,7 +2,6 @@ package ui;
 
 import model.GroceryItem;
 import model.Inventory;
-import persistence.ToRead;
 import persistence.ToWrite;
 
 import javax.imageio.ImageIO;
@@ -12,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -57,13 +55,18 @@ public class AddGroceryScene implements ActionListener {
     String perishable;
     //   MenuUI menuUI = new MenuUI();
 
+
+    // EFFECTS: throws IOException
     public AddGroceryScene() throws IOException {
 
     }
 
 
-    public void createScene2() throws IOException {
-        //      menuUI.getFrameScene().setVisible(false);
+    // REQUIRES: a path for the fridge.png image and a buffered image method to be declared as a field,
+    // also have all the JSwing components that are to be added to be instantiated and declared.
+    // MODIFIES: addGroceryScene JFrame
+    // EFFECTS: sets up the current scene with relevant parameters (JLables, JButtons etc.)
+    public void createScene2()  {
         addGroceryScene.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
         addGroceryScene.setLayout(null);//using no layout managers
         addGroceryScene.setVisible(true);
@@ -75,7 +78,9 @@ public class AddGroceryScene implements ActionListener {
         addGroceryScene.add(fridge);
     }
 
-    // What to do when add groceries button is clicked
+
+    // MODIFIES: this
+    // EFFECTS: has a optionPane box pop up that prompts users to enter specific attributes about the groceries
     public void jpaneDo() {
 
         this.name = JOptionPane.showInputDialog(addGroceryScene, "Enter Grocery Item Name");
@@ -91,6 +96,9 @@ public class AddGroceryScene implements ActionListener {
 
     }
 
+    // REQUIRES: The relevant JButtons to be instantiated and labelled
+    // MODIFIES: grocerySButtons collection
+    // EFFECTS: adds the corresponding buttons for the menu to the menuButtons collection
     public void addButtonsToFrame() {
 
         grocerySButtons.add(addGrocery);
@@ -107,6 +115,9 @@ public class AddGroceryScene implements ActionListener {
 
     }
 
+
+    // MODIFIES: addGroceryScene, JFrame
+    // EFFECTS: adds an action listener and sets all the buttons at certain vertical distance from each other
     public void addtoGroceryScene() {
         int newYPosition = 100;
         for (JButton j : grocerySButtons) {
@@ -124,6 +135,8 @@ public class AddGroceryScene implements ActionListener {
     }
 
 
+    // MODIFIES: addGroceryScene JFrame
+    // EFFECTS: makes the fridge image disappear/ appear and displays all the groceries added to the collection
     public void pantryShow() {
         if (fridge.isVisible() == false) {
             fridge.setVisible(true);
@@ -145,11 +158,6 @@ public class AddGroceryScene implements ActionListener {
             }
 
 
-//            groceryDisplay.setText(inventory.viewInventory() + "\n");
-//            groceryDisplay.setBounds(500, 180, 700, 200);
-//            groceryDisplay.setVisible(true);
-//            addGroceryScene.add(groceryDisplay);
-
         } else {
             fridge.setVisible(false);
 
@@ -158,53 +166,42 @@ public class AddGroceryScene implements ActionListener {
 
     }
 
-
+    // REQUIRES: Action Listeners to be added to the buttons and the string = the Action Event command
+    // MODIFIES: this
+    // EFFECTS: if a button is clicked, perform the corresponding method
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Add Groceries")) {
-
-
             jpaneDo();
-
         }
         if (e.getActionCommand().equals("View Pantry Items")) {
             pantryShow();
-
-
         }
 
         if (e.getActionCommand().equals("View Summary")) {
-
             addGroceryScene.setVisible(false);
             grocerySummary.dispose();
             summaryReport();
-
         }
         if (e.getActionCommand().equals("Save Items")) {
 
             ToWrite toWrite = new ToWrite();
             toWrite.writing(inventory.viewInventoryWrite(), "./data/Pantry_Items.txt");
             JOptionPane.showMessageDialog(addGroceryScene, "Successfully written to file 'Pantry Items'!");
-
-
         }
-
 
         if (e.getActionCommand().equals("Back to Pantry")) {
-
             grocerySummary.dispose();
             addGroceryScene.setVisible(true);
-
-
         }
-
         goToMenu(e);
     }
 
+
+    // EFFECTS: helper for ActionPerformed, if Return To Menu button is clicked, set current frame's visibiility
+    // to false, create a new Menu frame and go to it. Restart the whole program.
     private void goToMenu(ActionEvent e) {
         if (e.getActionCommand().equals("Return To Menu")) {
-
-
             addGroceryScene.setVisible(false);
             grocerySummary.setVisible(false);
             MenuUI menuUI = null;
@@ -214,16 +211,17 @@ public class AddGroceryScene implements ActionListener {
                 ex.printStackTrace();
             }
             menuUI.popMenu();
-
-
         }
     }
 
+
+    // MODIFIES: grocerySummary JFrame
+    // EFFECTS: creates grocerySummary JFrame which has price and perishable item information. Sets up/ adds
+    // all the components and calls on inventory functions to do the calculations.
     private void summaryReport() {
         grocerySummary.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
         grocerySummary.setLayout(null);//using no layout managers
         grocerySummary.setVisible(true);
-
 
         String totalMQRep = "Total money spent this grocery run is: " + inventory.totalPrice() + "$";
         String perishRep = "Number of perishable items in the fridge: " + inventory.perishableCount();
@@ -237,26 +235,7 @@ public class AddGroceryScene implements ActionListener {
         grocerySummary.add(perishableTotal);
         grocerySummary.add(bbutton);
         bbutton.addActionListener(this);
-        // ui.addLabel(perishableTotal, perishRep, );
-
-
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public String getQuantity() {
-        return quantity;
-
-    }
-
-    public String getPerishable() {
-        return perishable;
-    }
 }
 

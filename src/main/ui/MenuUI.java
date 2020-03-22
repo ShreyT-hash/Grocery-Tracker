@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,13 +18,19 @@ public class MenuUI implements ActionListener {
     ArrayList<JButton> menuButtons = new ArrayList<>();
     AddGroceryScene ags = new AddGroceryScene();
 
+
+
+
+    // EFFECTS: throws IOException down the hierarchy
     public MenuUI() throws IOException {
     }
 
 
+    // REQUIRES: The relevant JButtons to be instantiated and labelled
+    // MODIFIES: frameScene JFrame
+    // EFFECTS: adds the corresponding buttons for the menu to the menuButtons collection
     public void addButtonsToFrame() {
         menuButtons.add(viewPantry);
-       // menuButtons.add(loadItems);
         menuButtons.add(quitB);
         for (JButton j : menuButtons) {
             frameScene.add(j);
@@ -33,6 +38,10 @@ public class MenuUI implements ActionListener {
         }
     }
 
+
+
+    // MODIFIES: frameScene JFrame
+    // EFFECTS: sets up the scene and adds all the relevant components to the JFrame
     public void popMenu() {
         frameScene.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
         frameScene.setLayout(null);//using no layout managers
@@ -48,6 +57,8 @@ public class MenuUI implements ActionListener {
         frameScene.add(welcomeLabel);
     }
 
+    // MODIFIES: menuButtons
+    // EFFECTS: adds an action listener and sets all the buttons at certain vertical distance from each other
     public void addToInitialScene() {
         int newYPosition = 176;
         for (JButton j : menuButtons) {
@@ -58,28 +69,19 @@ public class MenuUI implements ActionListener {
 
         }
         for (JButton j : menuButtons) {
-
             j.addActionListener(this);
-
         }
 
     }
-
+    // REQUIRES: Action Listeners to be added to the buttons and the string = the Action Event command
+    // MODIFIES: this
+    // EFFECTS: if quit app is clicked, quit app, if go to pantry is clicked, go to the next JFrame (pantry scene)
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Quit Application")) {
-
-
             System.exit(0);
         } else if (e.getActionCommand().equals("Go To My Pantry")) {
-
-            // frameScene.setVisible(false);
-
-            try {
-                ags.createScene2();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            ags.createScene2();
         }
     }
 

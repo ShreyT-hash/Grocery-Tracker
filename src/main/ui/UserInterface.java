@@ -2,8 +2,7 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class UserInterface  {
 
@@ -13,12 +12,8 @@ public class UserInterface  {
     JFrame jframe = new JFrame();//creating instance of JFrame
 
 
-    public void createInitialScene() {
-        jframe.setSize(jframeWidth, jframeHeight);//400 width and 500 height
-        jframe.setLayout(null);//using no layout managers
-        jframe.setVisible(true);//making the frame visible
-    }
-
+    // MODIFIES: this
+    // EFFECTS: sets the parameters and aesthetics for JButtons
     public void addButton(Color buttonColor, Font buttonFont, JButton newjbutton, String btitle,
                           int bposX, int bposY, int width, int height) {
         newjbutton.setText(btitle);
@@ -29,6 +24,9 @@ public class UserInterface  {
         newjbutton.setActionCommand(btitle);
     }
 
+
+    // MODIFIES: this
+    // EFFECTS: sets the parameters and aesthetics for JLabels
     public void addLabel(JLabel newjLabel, String caption, int fsize, int bx, int by, int width, int height) {
         newjLabel.setOpaque(false);
         newjLabel.setText(caption);
@@ -36,11 +34,6 @@ public class UserInterface  {
         newjLabel.setFont(new Font("Segoe UI Light", (Font.PLAIN), fsize));
         newjLabel.setVisible(true);
         newjLabel.setBounds(JLabel.CENTER + bx, JLabel.CENTER - by, width, height); // 900, 500
-
-    }
-
-    public void addTextField(JTextField tft, int width, int height, int bx, int by) {
-        tft.setBounds(bx, by, width, height);
 
     }
 
