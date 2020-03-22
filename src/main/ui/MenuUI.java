@@ -19,8 +19,6 @@ public class MenuUI implements ActionListener {
     AddGroceryScene ags = new AddGroceryScene();
 
 
-
-
     // EFFECTS: throws IOException down the hierarchy
     public MenuUI() throws IOException {
     }
@@ -37,7 +35,6 @@ public class MenuUI implements ActionListener {
 
         }
     }
-
 
 
     // MODIFIES: frameScene JFrame
@@ -73,6 +70,7 @@ public class MenuUI implements ActionListener {
         }
 
     }
+
     // REQUIRES: Action Listeners to be added to the buttons and the string = the Action Event command
     // MODIFIES: this
     // EFFECTS: if quit app is clicked, quit app, if go to pantry is clicked, go to the next JFrame (pantry scene)
