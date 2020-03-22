@@ -13,11 +13,7 @@ public class MenuUI implements ActionListener {
     UserInterface ui = new UserInterface();
     JLabel welcomeLabel = new JLabel();
     JFrame frameScene = new JFrame();
-    JButton addGroceries = new JButton("Add Groceries");
     JButton viewPantry = new JButton("Go To My Pantry");
-    JButton viewMoney = new JButton("View Money");
-    JButton viewRecipes = new JButton("View Recipes");
-    JButton loadItems = new JButton("Load Items");
     JButton saveItems = new JButton("Save Items");
     JButton quitB = new JButton("Quit Application");
     ArrayList<JButton> menuButtons = new ArrayList<>();
@@ -29,9 +25,7 @@ public class MenuUI implements ActionListener {
 
     public void addButtonsToFrame() {
         menuButtons.add(viewPantry);
-        menuButtons.add(viewRecipes);
-        menuButtons.add(loadItems);
-        menuButtons.add(saveItems);
+       // menuButtons.add(loadItems);
         menuButtons.add(quitB);
         for (JButton j : menuButtons) {
             frameScene.add(j);

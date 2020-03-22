@@ -82,7 +82,7 @@ public class Menu {
     // MODIFIES: this
     // EFFECTS: loads a list of items from the Pantry_Items.txt file and adds
     // them to the current pantry
-    private void loadPreviousEntryItems() throws IOException {
+    public void loadPreviousEntryItems() throws IOException {
         ToRead toRead = new ToRead();
         toRead.setBr();
         toRead.parseFile(toRead.readAllLines(new File("./data/Pantry_Items.txt")));
@@ -173,7 +173,7 @@ public class Menu {
 
     //MODIFIES: this
     //EFFECTS: writes current grocery run items to a file called Pantry_Items.txt
-    private void saveFileUI() {
+    public void saveFileUI() {
 
         ToWrite write = new ToWrite();
 

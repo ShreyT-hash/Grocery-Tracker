@@ -3,6 +3,7 @@ package ui;
 import model.GroceryItem;
 import model.Inventory;
 import persistence.ToRead;
+import persistence.ToWrite;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,18 +27,21 @@ public class AddGroceryScene implements ActionListener {
 
 
     // To create fridge image
-    String imagePath = "C:\\Users\\shrey\\Desktop\\fridge.png";
+    String imagePath = "./data/fridge.png";
     BufferedImage myPicture = ImageIO.read(new File(imagePath));
 
     // Instantiating and declaring JComponents
     JPanel fridge = new JPanel();
+    JLabel header = new JLabel();
     JLabel picLabel = new JLabel(new ImageIcon(myPicture));
     JFrame addGroceryScene = new JFrame();
     JFrame grocerySummary = new JFrame();
     JButton addGrocery = new JButton("Add Groceries");
     JButton viewPantry = new JButton("View Pantry Items");
     JButton viewMoney = new JButton("View Summary");
+    JButton saveItems = new JButton("Save Items");
     JButton back = new JButton("Return To Menu");
+
     JButton bbutton = new JButton();
     // Instantiating and declraing model classes to use
     Inventory inventory = new Inventory();
@@ -91,6 +96,7 @@ public class AddGroceryScene implements ActionListener {
         grocerySButtons.add(addGrocery);
         grocerySButtons.add(viewPantry);
         grocerySButtons.add(viewMoney);
+        grocerySButtons.add(saveItems);
         grocerySButtons.add(back);
 
 
@@ -102,7 +108,7 @@ public class AddGroceryScene implements ActionListener {
     }
 
     public void addtoGroceryScene() {
-        int newYPosition = 180;
+        int newYPosition = 100;
         for (JButton j : grocerySButtons) {
 
             ui.addButton(Color.pink, defaultFont, j, j.getText(), 60,
@@ -121,7 +127,10 @@ public class AddGroceryScene implements ActionListener {
     public void pantryShow() {
         if (fridge.isVisible() == false) {
             fridge.setVisible(true);
-
+            ui.addLabel(header, "Item | Quantity |  Perishable? ", 25, 390,
+                    -50, 400, 40);
+            addGroceryScene.add(header);
+            header.setVisible(true);
             int newYPosition = 70;
             for (JLabel j : itemsList) {
 
@@ -163,7 +172,7 @@ public class AddGroceryScene implements ActionListener {
 
 
         }
-        menuAction(e);
+
         if (e.getActionCommand().equals("View Summary")) {
 
             addGroceryScene.setVisible(false);
@@ -171,6 +180,16 @@ public class AddGroceryScene implements ActionListener {
             summaryReport();
 
         }
+        if (e.getActionCommand().equals("Save Items")) {
+
+            ToWrite toWrite = new ToWrite();
+            toWrite.writing(inventory.viewInventoryWrite(), "./data/Pantry_Items.txt");
+            JOptionPane.showMessageDialog(addGroceryScene, "Successfully written to file 'Pantry Items'!");
+
+
+        }
+
+
         if (e.getActionCommand().equals("Back to Pantry")) {
 
             grocerySummary.dispose();
@@ -178,9 +197,11 @@ public class AddGroceryScene implements ActionListener {
 
 
         }
+
+        goToMenu(e);
     }
 
-    private void menuAction(ActionEvent e) {
+    private void goToMenu(ActionEvent e) {
         if (e.getActionCommand().equals("Return To Menu")) {
 
 
