@@ -96,6 +96,15 @@ public class GroceryTests {
         assertEquals(inventory.sumToString(), "You spent $8.8 on groceries this time");
     }
 
+    @Test
+    void testPerishToString() throws InputException {
+        inventory.addItemToInventory(milk, 1, true);
+        inventory.addItemToInventory(cheetoes, 4, false);
+        inventory.addItemToInventory(sugar, 2, false);
+        assertEquals(inventory.perishToString(), "Number of perishable items in the fridge: 1");
+    }
+
+
 
     @Test
     void testInventoryDisplay() throws InputException {

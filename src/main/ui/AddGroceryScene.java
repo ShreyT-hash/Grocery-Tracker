@@ -42,7 +42,7 @@ public class AddGroceryScene implements ActionListener {
     JButton back = new JButton("Return To Menu");
 
     JButton bbutton = new JButton();
-    // Instantiating and declraing model classes to use
+    // Instantiating and declaring model classes to use
     Inventory inventory = new Inventory();
     UserInterface ui = new UserInterface();
 
@@ -66,11 +66,9 @@ public class AddGroceryScene implements ActionListener {
     // REQUIRES: a path for the fridge.png image and a buffered image method to be declared as a field,
     // also have all the JSwing components that are to be added to be instantiated and declared.
     // MODIFIES: addGroceryScene JFrame
-    // EFFECTS: sets up the current scene with relevant parameters (JLables, JButtons etc.)
+    // EFFECTS: sets up the current scene with relevant parameters (Jlabels, JButtons etc.)
     public void createScene2() {
-        addGroceryScene.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
-        addGroceryScene.setLayout(null);//using no layout managers
-        addGroceryScene.setVisible(true);
+        ui.setBasicScene(addGroceryScene);
         fridge.add(picLabel);
         fridge.setVisible(true);
         addButtonsToFrame();
@@ -93,7 +91,6 @@ public class AddGroceryScene implements ActionListener {
         GroceryItem groceryItem = new GroceryItem(name, Double.parseDouble(price));
 
         inventory.addItemToInventory(groceryItem, Integer.parseInt(quantity), Boolean.valueOf(perishable));
-
 
         itemsList.add(new JLabel(name + " | " + quantity + " | " + perishable));
 
@@ -118,6 +115,12 @@ public class AddGroceryScene implements ActionListener {
 
         }
 
+        for (JButton j : grocerySButtons) {
+
+            j.addActionListener(this);
+
+        }
+
     }
 
 
@@ -132,11 +135,7 @@ public class AddGroceryScene implements ActionListener {
             newYPosition = newYPosition + 80;
 
         }
-        for (JButton j : grocerySButtons) {
 
-            j.addActionListener(this);
-
-        }
     }
 
 
@@ -180,7 +179,7 @@ public class AddGroceryScene implements ActionListener {
             try {
                 jpaneDo();
             } catch (InputException qu) {
-                System.out.println("Please enter a valid quantity input");
+                System.out.println("Please enter a valid quantity/price input");
             }
 
         }
@@ -228,28 +227,25 @@ public class AddGroceryScene implements ActionListener {
         }
     }
 
-
     // MODIFIES: grocerySummary JFrame
     // EFFECTS: creates grocerySummary JFrame which has price and perishable item information. Sets up/ adds
     // all the components and calls on inventory functions to do the calculations.
     private void summaryReport() {
-        grocerySummary.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
-        grocerySummary.setLayout(null);//using no layout managers
-        grocerySummary.setVisible(true);
+        ui.setBasicScene(grocerySummary);
 
-        String totalMQRep = "Total money spent this grocery run is: " + inventory.totalPrice() + "$";
-        String perishRep = "Number of perishable items in the fridge: " + inventory.perishableCount();
         totalMQ.setVisible(true);
         ui.addButton(Color.pink, defaultFont, bbutton, "Back to Pantry", 60,
                 360, 300, 70);
 
-        ui.addLabel(totalMQ, totalMQRep, 25, 150, -80, 500, 45);
-        ui.addLabel(perishableTotal, perishRep, 25, 150, -220, 500, 45);
+        ui.addLabel(totalMQ, inventory.sumToString(), 25, 150, -80, 500, 45);
+        ui.addLabel(perishableTotal, inventory.perishToString(), 25, 150, -220, 500, 45);
+        bbutton.addActionListener(this);
         grocerySummary.add(totalMQ);
         grocerySummary.add(perishableTotal);
         grocerySummary.add(bbutton);
-        bbutton.addActionListener(this);
+
     }
+
 
 }
 

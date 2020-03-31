@@ -58,6 +58,14 @@ public class Inventory {
     }
 
     // MODIFIES: this
+    // EFFECTS: returns the total amount of money spent on grocery items in a string format
+    public String perishToString() {
+        String finalSpend = "Number of perishable items in the fridge: " + perishableCount();
+        return finalSpend;
+    }
+
+
+    // MODIFIES: this
     // EFFECTS: returns a string that displays everything that is in the inventory, including quantity and
     // whether it is perishable or not
     public String viewInventory() {

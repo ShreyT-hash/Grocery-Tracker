@@ -13,7 +13,6 @@ public class MenuUI implements ActionListener {
     JLabel welcomeLabel = new JLabel();
     JFrame frameScene = new JFrame();
     JButton viewPantry = new JButton("Go To My Pantry");
-    JButton saveItems = new JButton("Save Items");
     JButton quitB = new JButton("Quit Application");
     ArrayList<JButton> menuButtons = new ArrayList<>();
     AddGroceryScene ags = new AddGroceryScene();
@@ -40,9 +39,7 @@ public class MenuUI implements ActionListener {
     // MODIFIES: frameScene JFrame
     // EFFECTS: sets up the scene and adds all the relevant components to the JFrame
     public void popMenu() {
-        frameScene.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
-        frameScene.setLayout(null);//using no layout managers
-        frameScene.setVisible(true);//making the frame visible
+        ui.setBasicScene(frameScene);
 
         ui.addLabel(welcomeLabel, "Welcome To Your Very Own Grocery Manager",
                 40, 185, 130, 900, 500);

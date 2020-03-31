@@ -46,4 +46,15 @@ public class UserInterface  {
     }
 
 
+    //REQUIRES: JFrame to be instantiated
+    // MODIFIES: this
+    // EFFECTS: Sets size, layout and visibility for all JFrames
+    public void setBasicScene(JFrame frame) {
+        frame.setSize(jframeWidth, jframeHeight);//400 width and 500 height
+        frame.setLayout(null);//using no layout managers
+        frame.setVisible(true);
+
+    }
+
+
 }

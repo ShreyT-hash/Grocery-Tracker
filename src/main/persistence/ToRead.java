@@ -1,7 +1,6 @@
 package persistence;
 
 
-import model.GroceryItem;
 import model.Inventory;
 
 import java.io.BufferedReader;

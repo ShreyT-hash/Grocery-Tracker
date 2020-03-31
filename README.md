@@ -46,3 +46,17 @@ by clicking on 'View Pantry Items' (*there is a chance groceries may not show up
 ensure 'View Pantry is clicked at least twice'*)
 
 - You can save the state of my application by clicking on 'Save Items'
+
+# <h4> Phase 4 Task 3</h4>	
+- First problem fix: The 'AddGroceryScene' class was sharing implementation 
+details with the 'Inventory' class. Rather than using 'Inventory' helper
+ methods (perishToString/ sumToString) I was recreating the toString methods 
+ from scratch. Fixed redundancy, lowered coupling and fewer implementation 
+ details shared. 
+ 
+- Second problem fix: Reduced coupling by creating another helper method in the 
+'UserInterface' class and using it to instantiate basic parameters for the Jframes. 
+Rather than repeating same lines of code, now I just need to  pass JFrame in as a parameter. 
+Reduces redundancy, cleaner code and now have single point of control for JFrame instantiation. 
+
+
