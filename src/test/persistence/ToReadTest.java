@@ -1,5 +1,6 @@
 package persistence;
 import model.GroceryItem;
+import exceptions.InputException;
 import model.Inventory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -25,7 +25,7 @@ public class ToReadTest {
     }
 
     @BeforeEach
-    void RunBefore(){
+    void RunBefore() throws InputException {
 
         inventory.addItemToInventory(bananas, 1, true);
         inventory.addItemToInventory(apples, 1, true);

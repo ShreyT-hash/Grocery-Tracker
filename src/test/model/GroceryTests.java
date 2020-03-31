@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.InputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -7,12 +8,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RecipeTest {
+public class GroceryTests {
 
     ArrayList <GroceryItem> penneArabiatta = new ArrayList<>();
     ArrayList <GroceryItem> cereal = new ArrayList<>();
     Inventory inventory = new Inventory();
-    Recipes recipes = new Recipes();
+
     GroceryItem milk = new GroceryItem("milk", 2);
     GroceryItem cheetoes = new GroceryItem("cheetoes", 1);
     GroceryItem sugar = new GroceryItem("sugar", 1.4);
@@ -34,16 +35,37 @@ public class RecipeTest {
     }
 
     @Test
-    void testCheckRecipe() {
-        inventory.addItemToInventory(milk, 1, true);
-        inventory.addItemToInventory(cheerioes, 1, true);
-        inventory.addItemToInventory(sugar, 2, false);
-        inventory.addItemToInventory(pasta, 2, false);
+    void testExceptionGetsThrown()  {
+        try {
+            inventory.addItemToInventory(milk, -3, true);
+            fail("Should not be here");
+            inventory.addItemToInventory(cheerioes, 1, true);
+            inventory.addItemToInventory(sugar, 2, false);
+            inventory.addItemToInventory(pasta, 2, false);
+        }
+        catch (InputException ie){
+            System.out.println("Success");
+        }
 
-        assertFalse(recipes.containsRecipe(inventory.getToCookItems(), penneArabiatta));
-        assertTrue(recipes.containsRecipe(inventory.getToCookItems(), cereal));
 
     }
+
+    @Test
+    void testExceptionNotThrown()  {
+        try {
+            inventory.addItemToInventory(milk, 9, true);
+
+            inventory.addItemToInventory(cheerioes, 1, true);
+            inventory.addItemToInventory(sugar, 2, false);
+            inventory.addItemToInventory(pasta, 2, false);
+        }
+        catch (InputException ie){
+            fail("Should not be here");
+        }
+
+
+    }
+
 
     @Test
     void testConstructor(){
@@ -52,31 +74,31 @@ public class RecipeTest {
         assertEquals(inventory.getToCookItems().size(), 0);
     }
     @Test
-    void testAddItem(){
+    void testAddItem() throws InputException {
         assertEquals(inventory.getFridgeItems().size(), 0);
         inventory.addItemToInventory(milk, 2, true);
         assertEquals(inventory.getFridgeItems().size(), 1);
     }
 
     @Test
-    void testSum(){
+    void testSum() throws InputException {
         inventory.addItemToInventory(milk, 2, true);
         inventory.addItemToInventory(cheetoes, 4, false);
         inventory.addItemToInventory(sugar, 1, false);
-        assertEquals(inventory.totalPrice(), 4.4);
+        assertEquals(inventory.totalPrice(), 9.4);
     }
 
     @Test
-    void testSumToString(){
+    void testSumToString() throws InputException {
         inventory.addItemToInventory(milk, 1, true);
         inventory.addItemToInventory(cheetoes, 4, false);
         inventory.addItemToInventory(sugar, 2, false);
-        assertEquals(inventory.sumToString(), "You spent $4.4 on groceries this time");
+        assertEquals(inventory.sumToString(), "You spent $8.8 on groceries this time");
     }
 
 
     @Test
-    void testInventoryDisplay(){
+    void testInventoryDisplay() throws InputException {
         inventory.addItemToInventory(milk, 1, true);
         inventory.addItemToInventory(cheetoes, 2, false);
         inventory.addItemToInventory(cheerioes, 3, true);
@@ -87,7 +109,7 @@ public class RecipeTest {
     }
 
     @Test
-    void testBoolCount(){
+    void testBoolCount() throws InputException {
         inventory.addItemToInventory(milk, 1, true);
         assertEquals(inventory.perishableCount(), 1);
         inventory.addItemToInventory(cheetoes, 2, false);

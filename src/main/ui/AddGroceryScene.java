@@ -1,6 +1,7 @@
 package ui;
 
 import model.GroceryItem;
+import exceptions.InputException;
 import model.Inventory;
 import persistence.ToWrite;
 
@@ -66,7 +67,7 @@ public class AddGroceryScene implements ActionListener {
     // also have all the JSwing components that are to be added to be instantiated and declared.
     // MODIFIES: addGroceryScene JFrame
     // EFFECTS: sets up the current scene with relevant parameters (JLables, JButtons etc.)
-    public void createScene2()  {
+    public void createScene2() {
         addGroceryScene.setSize(ui.getJframeWidth(), ui.getJframeHeight());//400 width and 500 height
         addGroceryScene.setLayout(null);//using no layout managers
         addGroceryScene.setVisible(true);
@@ -81,7 +82,7 @@ public class AddGroceryScene implements ActionListener {
 
     // MODIFIES: this
     // EFFECTS: has a optionPane box pop up that prompts users to enter specific attributes about the groceries
-    public void jpaneDo() {
+    public void jpaneDo() throws InputException {
 
         this.name = JOptionPane.showInputDialog(addGroceryScene, "Enter Grocery Item Name");
         this.quantity = JOptionPane.showInputDialog(addGroceryScene, "Enter Quantity");
@@ -90,11 +91,15 @@ public class AddGroceryScene implements ActionListener {
                 "Enter true if perishable, false if not");
 
         GroceryItem groceryItem = new GroceryItem(name, Double.parseDouble(price));
+
         inventory.addItemToInventory(groceryItem, Integer.parseInt(quantity), Boolean.valueOf(perishable));
+
+
         itemsList.add(new JLabel(name + " | " + quantity + " | " + perishable));
 
 
     }
+
 
     // REQUIRES: The relevant JButtons to be instantiated and labelled
     // MODIFIES: grocerySButtons collection
@@ -172,12 +177,27 @@ public class AddGroceryScene implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Add Groceries")) {
-            jpaneDo();
+            try {
+                jpaneDo();
+            } catch (InputException qu) {
+                System.out.println("Please enter a valid quantity input");
+            }
+
         }
         if (e.getActionCommand().equals("View Pantry Items")) {
             pantryShow();
         }
 
+        viewAndSaveItems(e);
+
+        if (e.getActionCommand().equals("Back to Pantry")) {
+            grocerySummary.dispose();
+            addGroceryScene.setVisible(true);
+        }
+        goToMenu(e);
+    }
+
+    private void viewAndSaveItems(ActionEvent e) {
         if (e.getActionCommand().equals("View Summary")) {
             addGroceryScene.setVisible(false);
             grocerySummary.dispose();
@@ -189,12 +209,6 @@ public class AddGroceryScene implements ActionListener {
             toWrite.writing(inventory.viewInventoryWrite(), "./data/Pantry_Items.txt");
             JOptionPane.showMessageDialog(addGroceryScene, "Successfully written to file 'Pantry Items'!");
         }
-
-        if (e.getActionCommand().equals("Back to Pantry")) {
-            grocerySummary.dispose();
-            addGroceryScene.setVisible(true);
-        }
-        goToMenu(e);
     }
 
 

@@ -1,6 +1,8 @@
 package model;
 
 
+import exceptions.InputException;
+
 import java.util.ArrayList;
 
 
@@ -20,9 +22,13 @@ public class Inventory {
     // REQUIRES: a valid grocery item to be inputted
     // MODIFIES: this
     // EFFECTS: adds recipe ingredient list, creates a new inventory item and then adds it to the fridgeItem list
-    public void addItemToInventory(GroceryItem gi, int quantity, boolean perishable) {
+    public void addItemToInventory(GroceryItem gi, int quantity, boolean perishable) throws InputException {
 
-        toCookItems.add(gi);
+
+        if ((quantity < 1) || (gi.getPrice() < 0)) {
+            throw new InputException();
+        }
+
         inventoryItem = new InventoryItem(gi, quantity, perishable);
         fridgeItems.add(inventoryItem);
 
