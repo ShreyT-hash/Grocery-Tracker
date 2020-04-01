@@ -172,7 +172,7 @@ public class AddGroceryScene implements ActionListener {
 
     // REQUIRES: Action Listeners to be added to the buttons and the string = the Action Event command
     // MODIFIES: this
-    // EFFECTS: if a button is clicked, perform the corresponding method
+    // EFFECTS: if a button is clicked, performs the corresponding method
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Add Groceries")) {
