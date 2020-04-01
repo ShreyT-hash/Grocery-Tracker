@@ -35,7 +35,7 @@ public class Inventory {
 
     }
 
-    // REQUIRES: frigeItems to not be an empty list
+    // REQUIRES: fridgeItems to not be an empty list
     // MODIFIES: this
     // EFFECTS: returns the total amount of money spent on grocery items
     public double totalPrice() {
